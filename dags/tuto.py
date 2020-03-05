@@ -8,12 +8,12 @@ from datetime import datetime, timedelta
 
 
 default_args = {
-    "owner": "airflow",
+    "owner": "jonas.bieri",
     "depends_on_past": False,
     "start_date": datetime(2015, 6, 1),
-    "email": ["airflow@airflow.com"],
-    "email_on_failure": False,
-    "email_on_retry": False,
+    "email": ["jonas.bieri@bs.ch"],
+    "email_on_failure": True,
+    "email_on_retry": True,
     "retries": 1,
     "retry_delay": timedelta(minutes=5),
     # 'queue': 'bash_queue',

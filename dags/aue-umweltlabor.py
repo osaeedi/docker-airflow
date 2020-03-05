@@ -4,13 +4,13 @@ from datetime import datetime, timedelta
 from airflow.operators.docker_operator import DockerOperator
 
 default_args = {
-        'owner'                 : 'airflow',
-        'description'           : 'Run the aue-umweltlabor container',
+        'owner'                 : 'jonas.bieri',
+        'description'           : 'Run the aue-umweltlabor docker container',
         'depend_on_past'        : False,
         'start_date'            : datetime(2020, 3, 3),
-        'email'                 : ["opendata@bs.ch"],
-        'email_on_failure'      : False,
-        'email_on_retry'        : False,
+        'email'                 : ["jonas.bieri@bs.ch", "jonas.eckenfels@bs.ch"],
+        'email_on_failure'      : True,
+        'email_on_retry'        : True,
         'retries'               : 0,
         'retry_delay'           : timedelta(minutes=30)
 }

@@ -5,7 +5,7 @@ build:
 
 run: build
 	docker-compose -f docker-compose.yml up -d
-	@echo airflow running on http://localhost:8080
+	@echo airflow running on http://pvpdstata01:8080
 
 kill:
 	@echo "Killing docker-airflow containers"
