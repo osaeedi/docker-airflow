@@ -1,7 +1,7 @@
 .PHONY: run build kill tty
 
 build:
-	docker build --rm --build-arg AIRFLOW_DEPS="datadog,dask" --build-arg PYTHON_DEPS="flask_bcrypt" -t opendatabs/docker-airflow .
+	docker build --rm --build-arg AIRFLOW_DEPS="datadog,dask" --build-arg PYTHON_DEPS="flask_bcrypt docker" -t opendatabs/docker-airflow .
 
 run: build
 	docker-compose -f docker-compose.yml up -d
