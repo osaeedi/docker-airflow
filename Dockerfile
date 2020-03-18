@@ -79,6 +79,9 @@ COPY config/webserver-config.py ${AIRFLOW_USER_HOME}/webserver-config.py
 
 RUN chown -R airflow: ${AIRFLOW_USER_HOME}
 
+RUN groupadd --gid 505 docker \
+    && usermod -aG docker airflow
+
 EXPOSE 8080 5555 8793
 
 USER airflow
