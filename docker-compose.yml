@@ -23,12 +23,13 @@ services:
             - AIRFLOW__CORE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
             - AIRFLOW__WEBSERVER__RBAC=true
             - AIRFLOW__API__AUTH_BACKEND=airflow.api.auth.backend.deny_all
+            - AIRFLOW__WEBSERVER__BASE_URL=http://pvpdstata01:8080
             - AIRFLOW__WEBSERVER__AUTHENTICATE=True
             - AIRFLOW__WEBSERVER__AUTH_BACKEND=airflow.contrib.auth.backends.password_auth
-            - AIRFLOW__ENDPOINT_URL=http://pvpdstata01:8080
-            - AIRFLOW__SMTP__BASE_URL=http://pvpdstata01:8080
+            - AIRFLOW__CLI__ENDPOINT_URL=http://pvpdstata01:8080
             - AIRFLOW__SMTP__SMTP_HOST=mail.bs.ch
             - AIRFLOW__SMTP__SMTP_MAIL_FROM=airflow@bs.ch
+            - AIRFLOW__SMTP__SMTP_STARTTLS=False
 
         logging:
             options:
