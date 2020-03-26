@@ -16,8 +16,8 @@ default_args = {
 }
 
 with DAG('stata-veranstaltungen', default_args=default_args, schedule_interval="0 20 * * *", catchup=False) as dag:
-        t1 = DockerOperator(
-                task_id='stata-veranstaltungen',
+        upload = DockerOperator(
+                task_id='upload',
                 image='stata-veranstaltungen:latest',
                 api_version='auto',
                 auto_remove=True,
@@ -29,4 +29,19 @@ with DAG('stata-veranstaltungen', default_args=default_args, schedule_interval="
                 volumes=['/mnt/OGD-DataExch/StatA/Veranstaltung:/code/data-processing/stata_veranstaltungen/data', '/data/dev/workspace/data-processing:/code/data-processing']
         )
 
-        t1
+        ods_publish = DockerOperator(
+                task_id='ods-publish',
+                image='ods-publish:latest',
+                api_version='auto',
+                auto_remove=True,
+                command='python3 -m ods_publish.etl da_so5l56',
+                container_name='ods-publish',
+                docker_url="unix://var/run/docker.sock",
+                network_mode="bridge",
+                tty=True,
+                volumes=['/data/dev/workspace/data-processing:/code/data-processing'],
+                retry=5,
+                retry_delay=timedelta(minutes=5)
+        )
+
+        upload >> ods_publish
