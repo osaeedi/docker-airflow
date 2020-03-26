@@ -17,7 +17,7 @@ default_args = {
 
 with DAG('aue-umweltlabor', default_args=default_args, schedule_interval="0 6 * * *", catchup=False) as dag:
         process_upload = DockerOperator(
-                task_id='aue-umweltlabor_process-upload',
+                task_id='process-upload',
                 image='aue-umweltlabor:latest',
                 api_version='auto',
                 auto_remove=True,
@@ -30,7 +30,7 @@ with DAG('aue-umweltlabor', default_args=default_args, schedule_interval="0 6 * 
         )
 
         ods_publish = DockerOperator(
-                task_id='aue-umweltlabor_ods-publish',
+                task_id='ods-publish',
                 image='ods-publish:latest',
                 api_version='auto',
                 auto_remove=True,
@@ -39,8 +39,9 @@ with DAG('aue-umweltlabor', default_args=default_args, schedule_interval="0 6 * 
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
                 tty=True,
-                volumes=['/data/dev/workspace/data-processing:/code/data-processing']
-
+                volumes=['/data/dev/workspace/data-processing:/code/data-processing'],
+                retry=5,
+                retry_delay=timedelta(minutes=5)
         )
 
         process_upload >> ods_publish
