@@ -10,7 +10,7 @@ default_args = {
         'start_date'            : datetime(2020, 3, 3),
         'email'                 : ["jonas.bieri@bs.ch", "jonas.eckenfels@bs.ch"],
         'email_on_failure'      : True,
-        'email_on_retry'        : True,
+        'email_on_retry'        : False,
         'retries'               : 0,
         'retry_delay'           : timedelta(minutes=30)
 }
