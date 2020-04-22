@@ -35,7 +35,7 @@ with DAG('meteoblue-wolf', default_args=default_args, schedule_interval="10 * * 
         api_version='auto',
         auto_remove=True,
         command='python3 -m ods_publish.etl da_1wb331,da_0ok4u4',
-        container_name='ods-publish',
+        container_name='meteoblue-wolf--ods-publish',
         docker_url="unix://var/run/docker.sock",
         network_mode="bridge",
         tty=True,
