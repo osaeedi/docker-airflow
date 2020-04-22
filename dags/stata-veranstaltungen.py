@@ -35,7 +35,7 @@ with DAG('stata-veranstaltungen', default_args=default_args, schedule_interval="
                 api_version='auto',
                 auto_remove=True,
                 command='python3 -m ods_publish.etl da_so5l56',
-                container_name='ods-publish',
+                container_name='stata-veranstaltungen--ods-publish',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
                 tty=True,
