@@ -26,7 +26,7 @@ with DAG('euroairport', default_args=default_args, schedule_interval="0 12 * * *
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge", 
                 tty=True,
-                volumes=['/mnt/OGD-DataExch/EuroAirport:/code/data-processing/euroairport/data, '/data/dev/workspace/data-processing:/code/data-processing']
+                volumes=['/mnt/OGD-DataExch/EuroAirport:/code/data-processing/euroairport/data', '/data/dev/workspace/data-processing:/code/data-processing']
         )
 
         ods_publish = DockerOperator(
