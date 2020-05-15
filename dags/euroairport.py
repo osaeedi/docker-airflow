@@ -15,7 +15,7 @@ default_args = {
         'retry_delay'           : timedelta(minutes=30)
 }
 
-with DAG('euroairport', default_args=default_args, schedule_interval="0 12 * * *", catchup=False) as dag:
+with DAG('euroairport', default_args=default_args, schedule_interval="0 10 * * *", catchup=False) as dag:
         upload = DockerOperator(
                 task_id='upload',
                 image='euroairport:latest',
