@@ -35,7 +35,7 @@ with DAG('verkehrszaehldaten', default_args=default_args, schedule_interval="0 4
                 image='ods-publish:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='python3 -m ods_publish.etl da_koisz3 da_ob8g0d',
+                command='python3 -m ods_publish.etl da_koisz3,da_ob8g0d',
                 container_name='verkehrszaehldaten--ods-publish',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
