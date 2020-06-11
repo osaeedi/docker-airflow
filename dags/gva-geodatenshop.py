@@ -30,6 +30,4 @@ with DAG('gva-geodatenshop', default_args=default_args, schedule_interval="0 5 *
                  '/mnt/OGD-GVA:/code/data-processing/gva_geodatenshop/data_orig']
     )
 
-# todo: run harvester
-
-process_upload
+    process_upload
