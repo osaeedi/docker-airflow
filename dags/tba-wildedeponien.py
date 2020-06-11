@@ -15,7 +15,7 @@ default_args = {
     'retry_delay': timedelta(minutes=3)
 }
 
-with DAG('tba-wildedeponien', default_args=default_args, schedule_interval="0 8,15 * * *", catchup=False) as dag:
+with DAG('tba-wildedeponien', default_args=default_args, schedule_interval="0 7,14 * * *", catchup=False) as dag:
     process_upload = DockerOperator(
         task_id='process-upload',
         image='tba-wildedeponien:latest',
