@@ -30,4 +30,20 @@ with DAG('gva-geodatenshop', default_args=default_args, schedule_interval="0 5 *
                  '/mnt/OGD-GVA:/code/data-processing/gva_geodatenshop/data_orig']
     )
 
-    process_upload
+    ods_harvest = DockerOperator(
+        task_id='ods-harvest',
+        image='ods-harvest:latest',
+        api_version='auto',
+        auto_remove=True,
+        command='python3 -m ods_harvest.etl gva-ftp-csv',
+        container_name='gva-geodatenshop--ods-harvest',
+        docker_url="unix://var/run/docker.sock",
+        network_mode="bridge",
+        tty=True,
+        volumes=['/data/dev/workspace/data-processing:/code/data-processing'],
+        retry=3,
+        retry_delay=timedelta(minutes=10)
+    )
+
+
+    process_upload >> ods_harvest
