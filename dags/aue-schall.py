@@ -34,7 +34,7 @@ with DAG('aue-schall', default_args=default_args, schedule_interval="*/15 * * * 
                 image='ods-publish:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='python3 -m ods_publish.etl da_f2oh5d',
+                command='python3 -m ods_publish.etl da_jljxu2,da_nr71j8',
                 container_name='aue_schall--ods-publish',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
