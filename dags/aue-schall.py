@@ -18,7 +18,7 @@ default_args = {
 with DAG('aue-schall', default_args=default_args, schedule_interval="*/15 * * * *", catchup=False) as dag:
         upload = DockerOperator(
                 task_id='upload',
-                image='aue-schall:latest',
+                image='aue_schall:latest',
                 api_version='auto',
                 auto_remove=True,
                 command='/bin/bash /code/data-processing/aue_schall/etl.sh ',
@@ -35,7 +35,7 @@ with DAG('aue-schall', default_args=default_args, schedule_interval="*/15 * * * 
                 api_version='auto',
                 auto_remove=True,
                 command='python3 -m ods_publish.etl da_f2oh5d',
-                container_name='aue-schall--ods-publish',
+                container_name='aue_schall--ods-publish',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
                 tty=True,
