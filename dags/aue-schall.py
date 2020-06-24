@@ -15,7 +15,7 @@ default_args = {
         'retry_delay'           : timedelta(minutes=15)
 }
 
-with DAG('covid19bs', default_args=default_args, schedule_interval="*/15 * * * *", catchup=False) as dag:
+with DAG('aue-schall', default_args=default_args, schedule_interval="*/15 * * * *", catchup=False) as dag:
         upload = DockerOperator(
                 task_id='upload',
                 image='aue-schall:latest',
