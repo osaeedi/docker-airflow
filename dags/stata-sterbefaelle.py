@@ -34,7 +34,7 @@ with DAG('stata-sterbefaelle', default_args=default_args, schedule_interval="30 
                 image='ods-publish:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='python3 -m ods_publish.etl da_3lkvlj',
+                command='python3 -m ods_publish.etl da_vun6ea',
                 container_name='stata-sterbefaelle--ods-publish',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
