@@ -15,7 +15,7 @@ default_args = {
     'retry_delay': timedelta(minutes=3)
 }
 
-with DAG('staka_wahlen_abstimmungen', default_args=default_args, catchup=False) as dag:
+with DAG('staka_wahlen_abstimmungen', default_args=default_args, schedule_interval=None, catchup=False) as dag:
     process_upload = DockerOperator(
         task_id='process-upload',
         image='staka_wahlen_abstimmungen:latest',
@@ -35,7 +35,7 @@ with DAG('staka_wahlen_abstimmungen', default_args=default_args, catchup=False) 
         image='ods-publish:latest',
         api_version='auto',
         auto_remove=True,
-        command='python3 -m ods_publish.etl da_7nb6hq, da_l478vx',
+        command='python3 -m ods_publish.etl da_7nb6hq,da_l478vx',
         container_name='staka_wahlen_abstimmungen--ods-publish',
         docker_url="unix://var/run/docker.sock",
         network_mode="bridge",
