@@ -15,7 +15,7 @@ default_args = {
         'retry_delay'           : timedelta(minutes=15)
 }
 
-with DAG('verkehrszaehldaten', default_args=default_args, schedule_interval="0 4 * * *", catchup=False) as dag:
+with DAG('verkehrszaehldaten', default_args=default_args, schedule_interval="0 5 * * *", catchup=False) as dag:
         upload = DockerOperator(
                 task_id='upload',
                 image='verkehrszaehldaten:latest',
