@@ -45,4 +45,4 @@ with DAG('staka_wahlen_abstimmungen', default_args=default_args, schedule_interv
         retry_delay=timedelta(minutes=5)
     )
 
-    process_upload >> ods_publish
+    process_upload >> ods_publish 
