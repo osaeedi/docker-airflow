@@ -7,7 +7,7 @@ default_args = {
     'owner': 'jonas.bieri',
     'description': 'Run the staka_abstimmungen docker container',
     'depend_on_past': False,
-    'start_date': datetime(2020, 9, 16),
+    'start_date': datetime(2020, 12, 2),
     'email': ["jonas.bieri@bs.ch", "jonas.eckenfels@bs.ch"],
     'email_on_failure': True,
     'email_on_retry': False,
