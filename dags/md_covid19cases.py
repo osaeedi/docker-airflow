@@ -26,7 +26,7 @@ with DAG('md_covid19cases', default_args=default_args, schedule_interval=None, c
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge", 
                 tty=True,
-                volumes=['/data/dev/workspace/data-processing:/code/data-processing', '/mnt/OGD-DataExch/MD/upload:/code/data-processing/md_covid19cases/data']
+                volumes=['/data/dev/workspace/data-processing:/code/data-processing', '/mnt/OGD-DataExch/MD/upload:/code/data-processing/md_covid19cases/data_orig', '/mnt/OGD-DataExch/MD/ogd_upload:/code/data-processing/md_covid19cases/data']
         )
 
         ods_publish = DockerOperator(
@@ -34,7 +34,7 @@ with DAG('md_covid19cases', default_args=default_args, schedule_interval=None, c
                 image='ods-publish:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='python3 -m ods_publish.etl da_26x05x',
+                command='python3 -m ods_publish.etl da_26x05x,da_whajy4',
                 container_name='md_covid19cases--ods-publish',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
