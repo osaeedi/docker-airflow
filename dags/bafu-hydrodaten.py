@@ -15,7 +15,7 @@ default_args = {
         'retry_delay'           : timedelta(minutes=15)
 }
 
-with DAG('bafu_hydrodaten', default_args=default_args, schedule_interval="*/10 * * * *", catchup=False) as dag:
+with DAG('bafu_hydrodaten', default_args=default_args, schedule_interval="*/5 * * * *", catchup=False) as dag:
         upload = DockerOperator(
                 task_id='upload',
                 image='bafu_hydrodaten:latest',
@@ -44,4 +44,5 @@ with DAG('bafu_hydrodaten', default_args=default_args, schedule_interval="*/10 *
                 retry_delay=timedelta(minutes=5)
         )
 
-        upload >> ods_publish
+        #upload >> ods_publish
+        upload
