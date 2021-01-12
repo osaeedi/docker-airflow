@@ -29,19 +29,19 @@ with DAG('bafu_hydrodaten', default_args=default_args, schedule_interval="*/5 * 
                 volumes=['/data/dev/workspace/data-processing:/code/data-processing']
         )
 
-        ods_publish = DockerOperator(
-                task_id='ods-publish',
-                image='ods-publish:latest',
-                api_version='auto',
-                auto_remove=True,
-                command='python3 -m ods_publish.etl da_uuvdoh',
-                container_name='bafu_hydrodaten--ods-publish',
-                docker_url="unix://var/run/docker.sock",
-                network_mode="bridge",
-                tty=True,
-                volumes=['/data/dev/workspace/data-processing:/code/data-processing'],
-                retry=1,
-                retry_delay=timedelta(minutes=5)
-        )
-
-        upload >> ods_publish
+        # ods_publish = DockerOperator(
+        #         task_id='ods-publish',
+        #         image='ods-publish:latest',
+        #         api_version='auto',
+        #         auto_remove=True,
+        #         command='python3 -m ods_publish.etl da_uuvdoh',
+        #         container_name='bafu_hydrodaten--ods-publish',
+        #         docker_url="unix://var/run/docker.sock",
+        #         network_mode="bridge",
+        #         tty=True,
+        #         volumes=['/data/dev/workspace/data-processing:/code/data-processing'],
+        #         retry=1,
+        #         retry_delay=timedelta(minutes=5)
+        # )
+        #
+        # upload >> ods_publish
