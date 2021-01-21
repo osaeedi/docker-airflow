@@ -26,7 +26,7 @@ with DAG('stata_daily_upload', default_args=default_args, schedule_interval="30 
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge", 
                 tty=True,
-                volumes=['/mnt/OGD-DataExch/StatA/Bevoelkerung:/code/data-processing/stata_daily_upload/data', '/data/dev/workspace/data-processing:/code/data-processing']
+                volumes=['/mnt/OGD-DataExch/StatA:/code/data-processing/stata_daily_upload/data', '/data/dev/workspace/data-processing:/code/data-processing']
         )
 
         ods_publish = DockerOperator(
@@ -34,7 +34,7 @@ with DAG('stata_daily_upload', default_args=default_args, schedule_interval="30 
                 image='ods-publish:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='python3 -m ods_publish.etl da_vun6ea,da_710qw5,da_8b4qjp',
+                command='python3 -m ods_publish.etl da_vun6ea,da_710qw5,da_8b4qjp,da_o3fbuk,da_97mu0o',
                 container_name='stata_daily_upload--ods-publish',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
