@@ -1,3 +1,10 @@
+"""
+# md_covid19cases
+This DAG updates the following datasets:
+- https://data.bs.ch/explore/dataset/100105
+- https://data.bs.ch/explore/dataset/100108
+"""
+
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
@@ -15,12 +22,6 @@ default_args = {
     'retry_delay': timedelta(minutes=15)
 }
 
-"""
-# md_covid19cases
-This DAG updates the following datasets: 
-- https://data.bs.ch/explore/dataset/100105
-- https://data.bs.ch/explore/dataset/100108
-"""
 
 with DAG('md_covid19cases', default_args=default_args, schedule_interval='0 * * * *', catchup=False) as dag:
     dag.doc_md = __doc__
