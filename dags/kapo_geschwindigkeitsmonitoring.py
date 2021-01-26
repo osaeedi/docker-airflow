@@ -1,3 +1,11 @@
+"""
+# md_covid19cases
+This DAG updates the following datasets:
+
+- [100112](https://data.bs.ch/explore/dataset/100112)
+- [100097](https://data.bs.ch/explore/dataset/100097)
+"""
+
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
@@ -35,7 +43,8 @@ with DAG('kapo_geschwindigkeitsmonitoring', default_args=default_args, schedule_
                 image='ods-publish:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='python3 -m ods_publish.etl da_npx2b3,da_b319m2',
+                # command='python3 -m ods_publish.etl da_npx2b3,da_b319m2',
+                command='python3 -m ods_publish.etl_id 100112,100097',
                 container_name='kapo_geschwindigkeitsmonitoring--ods-publish',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
