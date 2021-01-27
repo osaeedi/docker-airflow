@@ -1,5 +1,5 @@
 """
-# md_covid19cases
+# kapo_geschwindigkeitsmonitoring
 This DAG updates the following datasets:
 
 - [100112](https://data.bs.ch/explore/dataset/100112)
