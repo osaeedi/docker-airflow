@@ -23,7 +23,7 @@ default_args = {
         'retry_delay'           : timedelta(minutes=15)
 }
 
-with DAG('kapo_geschwindigkeitsmonitoring', default_args=default_args, schedule_interval=None, catchup=False) as dag:
+with DAG('kapo_geschwindigkeitsmonitoring', default_args=default_args, schedule_interval='0 2 * * *', catchup=False) as dag:
         upload = DockerOperator(
                 task_id='upload',
                 image='kapo_geschwindigkeitsmonitoring:latest',
