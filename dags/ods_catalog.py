@@ -23,7 +23,7 @@ default_args = {
 }
 
 
-with DAG('ods_catalog', default_args=default_args, schedule_interval='0 * * * *', catchup=False) as dag:
+with DAG('ods_catalog', default_args=default_args, schedule_interval='3 * * * *', catchup=False) as dag:
     dag.doc_md = __doc__
     upload = DockerOperator(
         task_id='upload',
