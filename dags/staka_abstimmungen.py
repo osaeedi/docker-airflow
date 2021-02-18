@@ -35,7 +35,7 @@ with DAG('staka_abstimmungen', default_args=default_args, schedule_interval=None
         image='ods-publish:latest',
         api_version='auto',
         auto_remove=True,
-        command='python3 -m ods_publish.etl da_v578zg,da_oep2f5',
+        command='python3 -m ods_publish.etl_id 100117,100118',
         container_name='staka_abstimmungen--ods-publish',
         docker_url="unix://var/run/docker.sock",
         network_mode="bridge",
