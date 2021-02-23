@@ -1,3 +1,9 @@
+"""
+# bag_coronavirus-tests
+This DAG updates the following datasets:
+
+- [100094](https://data.bs.ch/explore/dataset/100094)
+"""
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
@@ -16,6 +22,7 @@ default_args = {
 }
 
 with DAG('bag_coronavirus_tests', default_args=default_args, schedule_interval="0 * * * *", catchup=False) as dag:
+        dag.doc_md = __doc__
         upload = DockerOperator(
                 task_id='upload',
                 image='bag_coronavirus_tests:latest',

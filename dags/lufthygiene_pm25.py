@@ -1,3 +1,10 @@
+"""
+# lufthygiene_pm25
+This DAG updates the following datasets:
+
+- [100081](https://data.bs.ch/explore/dataset/100081)
+- [100084](https://data.bs.ch/explore/dataset/100084)
+"""
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
@@ -16,6 +23,7 @@ default_args = {
 }
 
 with DAG('lufthygiene_pm25', default_args=default_args, schedule_interval="*/15 * * * *", catchup=False) as dag:
+    dag.doc_md = __doc__
     upload = DockerOperator(
         task_id='upload',
         image='lufthygiene_pm25:latest',

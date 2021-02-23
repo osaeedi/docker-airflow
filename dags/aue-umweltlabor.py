@@ -1,3 +1,12 @@
+"""
+# aue-umweltlabor
+This DAG updates the following datasets:
+
+- [100066](https://data.bs.ch/explore/dataset/100066)
+- [100067](https://data.bs.ch/explore/dataset/100067)
+- [100068](https://data.bs.ch/explore/dataset/100068)
+- [100069](https://data.bs.ch/explore/dataset/100069)
+"""
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
@@ -16,6 +25,7 @@ default_args = {
 }
 
 with DAG('aue-umweltlabor', default_args=default_args, schedule_interval="0 6 * * *", catchup=False) as dag:
+        dag.doc_md = __doc__
         process_upload = DockerOperator(
                 task_id='process-upload',
                 image='aue-umweltlabor:latest',

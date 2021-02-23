@@ -1,3 +1,9 @@
+"""
+# bafu-hydrodaten
+This DAG updates the following datasets:
+
+- [100089](https://data.bs.ch/explore/dataset/100089)
+"""
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
@@ -16,6 +22,7 @@ default_args = {
 }
 
 with DAG('bafu_hydrodaten', default_args=default_args, schedule_interval="*/5 * * * *", catchup=False) as dag:
+        dag.doc_md = __doc__
         upload = DockerOperator(
                 task_id='upload',
                 image='bafu_hydrodaten:latest',
