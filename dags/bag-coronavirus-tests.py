@@ -3,6 +3,7 @@
 This DAG updates the following datasets:
 
 - [100094](https://data.bs.ch/explore/dataset/100094)
+- [100119](https://data.bs.ch/explore/dataset/100119)
 """
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
@@ -41,7 +42,7 @@ with DAG('bag_coronavirus_tests', default_args=default_args, schedule_interval="
                 image='ods-publish:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='python3 -m ods_publish.etl da_rg0itv',
+                command='python3 -m ods_publish.etl_id 100094,100119',
                 container_name='bag_coronavirus_tests--ods-publish',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
