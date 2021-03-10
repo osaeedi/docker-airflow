@@ -1,3 +1,9 @@
+"""
+# tba_abfuhrtermine
+This DAG updates the 2 datasets that cover the latest polls. At time of this writing, these are:
+
+- [100096](https://data.bs.ch/explore/dataset/100096)
+"""
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
@@ -16,6 +22,7 @@ default_args = {
 }
 
 with DAG('tba_abfuhrtermine', default_args=default_args, schedule_interval="0 10 * * *", catchup=False) as dag:
+    dag.doc_md = __doc__
     process_upload = DockerOperator(
         task_id='process-upload',
         image='tba_abfuhrtermine:latest',
@@ -34,7 +41,7 @@ with DAG('tba_abfuhrtermine', default_args=default_args, schedule_interval="0 10
         image='ods-publish:latest',
         api_version='auto',
         auto_remove=True,
-        command='python3 -m ods_publish.etl "da_dt6ayd"',
+        command='python3 -m ods_publish.etl_id 100096',
         container_name='tba-abfuhrtermine--ods-publish',
         docker_url="unix://var/run/docker.sock",
         network_mode="bridge",
