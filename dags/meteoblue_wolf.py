@@ -1,3 +1,10 @@
+"""
+# meteoblue_wolf
+This DAG updates the following datasets:
+
+- [100009](https://data.bs.ch/explore/dataset/100009)
+- [100082](https://data.bs.ch/explore/dataset/100082)
+"""
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
@@ -16,6 +23,7 @@ default_args = {
 }
 
 with DAG('meteoblue_wolf', default_args=default_args, schedule_interval="10 * * * *", catchup=False) as dag:
+    dag.doc_md = __doc__
     process_upload = DockerOperator(
         task_id='process-upload',
         image='meteoblue-wolf:latest',
@@ -34,7 +42,7 @@ with DAG('meteoblue_wolf', default_args=default_args, schedule_interval="10 * * 
         image='ods-publish:latest',
         api_version='auto',
         auto_remove=True,
-        command='python3 -m ods_publish.etl da_1wb331,da_0ok4u4',
+        command='python3 -m ods_publish.etl_id 100009,100082',
         container_name='meteoblue-wolf--ods-publish',
         docker_url="unix://var/run/docker.sock",
         network_mode="bridge",
