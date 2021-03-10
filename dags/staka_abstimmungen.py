@@ -1,3 +1,10 @@
+"""
+# ods_catalog
+This DAG updates the 2 datasets that cover the latest polls. At time of this writing, these are:
+
+- [100117](https://data.bs.ch/explore/dataset/100117)
+- [100118](https://data.bs.ch/explore/dataset/100118)
+"""
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
@@ -16,6 +23,7 @@ default_args = {
 }
 
 with DAG('staka_abstimmungen', default_args=default_args, schedule_interval=None, catchup=False) as dag:
+    dag.doc_md = __doc__
     process_upload = DockerOperator(
         task_id='process-upload',
         image='staka_abstimmungen:latest',
