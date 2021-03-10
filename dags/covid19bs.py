@@ -43,7 +43,7 @@ with DAG('covid19bs', default_args=default_args, schedule_interval="*/10 * * * *
                 image='ods-publish:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='python3 -m ods_publish.etl da_0fwjf7',
+                command='python3 -m ods_publish.etl_id 100073',
                 container_name='covid19bs--ods-publish',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
