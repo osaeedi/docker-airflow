@@ -4,7 +4,6 @@ This DAG updates the following datasets:
 
 - [100073](https://data.bs.ch/explore/dataset/100073)
 """
-
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
