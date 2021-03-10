@@ -1,6 +1,6 @@
 """
-# ods_catalog
-This DAG updates the 2 datasets that cover the latest polls. At time of this writing, these are:
+# stata_daily_upload
+This DAG updates the following datasets:
 
 - [100079](https://data.bs.ch/explore/dataset/100079)
 - [100092](https://data.bs.ch/explore/dataset/100092)

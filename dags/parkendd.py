@@ -1,5 +1,5 @@
 """
-# ods_catalog
+# parkendd
 This DAG updates the following datasets:
 
 - [100014](https://data.bs.ch/explore/dataset/100014)

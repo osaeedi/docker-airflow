@@ -1,6 +1,6 @@
 """
 # stata_veranstaltungen
-This DAG updates the 2 datasets that cover the latest polls. At time of this writing, these are:
+This DAG updates the following datasets:
 
 - [100074](https://data.bs.ch/explore/dataset/100074)
 """
