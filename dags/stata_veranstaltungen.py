@@ -1,3 +1,9 @@
+"""
+# stata_veranstaltungen
+This DAG updates the 2 datasets that cover the latest polls. At time of this writing, these are:
+
+- [100074](https://data.bs.ch/explore/dataset/100074)
+"""
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
@@ -16,6 +22,7 @@ default_args = {
 }
 
 with DAG('stata_veranstaltungen', default_args=default_args, schedule_interval="0 20 * * *", catchup=False) as dag:
+        dag.doc_md = __doc__
         upload = DockerOperator(
                 task_id='upload',
                 image='stata-veranstaltungen:latest',
@@ -34,7 +41,7 @@ with DAG('stata_veranstaltungen', default_args=default_args, schedule_interval="
                 image='ods-publish:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='python3 -m ods_publish.etl da_so5l56',
+                command='python3 -m ods_publish.etl_id 100074',
                 container_name='stata-veranstaltungen--ods-publish',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
