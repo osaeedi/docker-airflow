@@ -1,3 +1,9 @@
+"""
+# covid19_hosp
+This DAG updates the following datasets:
+
+- [100109](https://data.bs.ch/explore/dataset/100109)
+"""
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
@@ -16,6 +22,7 @@ default_args = {
 }
 
 with DAG('covid19_hosp', default_args=default_args, schedule_interval='*/15 * * * *', catchup=False) as dag:
+        dag.doc_md = __doc__
         upload = DockerOperator(
                 task_id='upload',
                 image='covid19_hosp:latest',
@@ -34,7 +41,7 @@ with DAG('covid19_hosp', default_args=default_args, schedule_interval='*/15 * * 
                 image='ods-publish:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='python3 -m ods_publish.etl da_17fpk5',
+                command='python3 -m ods_publish.etl_id 100109',
                 container_name='covid19_hosp--ods-publish',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
