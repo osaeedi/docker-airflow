@@ -1,3 +1,9 @@
+"""
+# euroairport
+This DAG updates the following datasets:
+
+- [100078](https://data.bs.ch/explore/dataset/100078)
+"""
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
@@ -16,6 +22,7 @@ default_args = {
 }
 
 with DAG('euroairport', default_args=default_args, schedule_interval="0 8 * * *", catchup=False) as dag:
+        dag.doc_md = __doc__
         upload = DockerOperator(
                 task_id='upload',
                 image='euroairport:latest',
@@ -34,7 +41,7 @@ with DAG('euroairport', default_args=default_args, schedule_interval="0 8 * * *"
                 image='ods-publish:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='python3 -m ods_publish.etl da_a7yzdy',
+                command='python3 -m ods_publish.etl_id 100078',
                 container_name='euroairport--ods-publish',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
