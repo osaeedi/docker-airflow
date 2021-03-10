@@ -15,7 +15,7 @@ default_args = {
         'retry_delay'           : timedelta(minutes=30)
 }
 
-with DAG('stata-veranstaltungen', default_args=default_args, schedule_interval="0 20 * * *", catchup=False) as dag:
+with DAG('stata_veranstaltungen', default_args=default_args, schedule_interval="0 20 * * *", catchup=False) as dag:
         upload = DockerOperator(
                 task_id='upload',
                 image='stata-veranstaltungen:latest',
