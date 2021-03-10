@@ -5,9 +5,9 @@ from airflow.operators.docker_operator import DockerOperator
 
 default_args = {
     'owner': 'jonas.bieri',
-    'description': 'Run the tba_abfuhrtermine docker container',
+    'description': 'Run the gva-geodatenshop docker container',
     'depend_on_past': False,
-    'start_date': datetime(2020, 8, 24),
+    'start_date': datetime(2020, 6, 11),
     'email': ["jonas.bieri@bs.ch", "jonas.eckenfels@bs.ch"],
     'email_on_failure': True,
     'email_on_retry': False,
@@ -15,33 +15,35 @@ default_args = {
     'retry_delay': timedelta(minutes=3)
 }
 
-with DAG('tba-abfuhrtermine', default_args=default_args, schedule_interval="0 10 * * *", catchup=False) as dag:
+with DAG('gva_geodatenshop', default_args=default_args, schedule_interval="0 5 * * *", catchup=False) as dag:
     process_upload = DockerOperator(
         task_id='process-upload',
-        image='tba_abfuhrtermine:latest',
+        image='gva-geodatenshop:latest',
         api_version='auto',
         auto_remove=True,
-        command='/bin/bash /code/data-processing/tba_abfuhrtermine/etl.sh ',
-        container_name='tba_abfuhrtermine',
+        command='/bin/bash /code/data-processing/gva_geodatenshop/etl.sh ',
+        container_name='gva-geodatenshop',
         docker_url="unix://var/run/docker.sock",
         network_mode="bridge",
         tty=True,
-        volumes=['/mnt/OGD-GVA:/code/data-processing/tba_abfuhrtermine/data_orig','/data/dev/workspace/data-processing:/code/data-processing']
+        volumes=['/data/dev/workspace/data-processing:/code/data-processing',
+                 '/mnt/OGD-GVA:/code/data-processing/gva_geodatenshop/data_orig']
     )
 
-    ods_publish = DockerOperator(
-        task_id='ods-publish',
-        image='ods-publish:latest',
+    ods_harvest = DockerOperator(
+        task_id='ods-harvest',
+        image='ods-harvest:latest',
         api_version='auto',
         auto_remove=True,
-        command='python3 -m ods_publish.etl "da_dt6ayd"',
-        container_name='tba-abfuhrtermine--ods-publish',
+        command='python3 -m ods_harvest.etl gva-ftp-csv',
+        container_name='gva-geodatenshop--ods-harvest',
         docker_url="unix://var/run/docker.sock",
         network_mode="bridge",
         tty=True,
         volumes=['/data/dev/workspace/data-processing:/code/data-processing'],
-        retry=5,
-        retry_delay=timedelta(minutes=5)
+        retry=3,
+        retry_delay=timedelta(minutes=10)
     )
 
-    process_upload >> ods_publish
+
+    process_upload >> ods_harvest

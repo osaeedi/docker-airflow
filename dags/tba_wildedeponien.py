@@ -5,9 +5,9 @@ from airflow.operators.docker_operator import DockerOperator
 
 default_args = {
     'owner': 'jonas.bieri',
-    'description': 'Run the gva-geodatenshop docker container',
+    'description': 'Run the tba-wildedeponien docker container',
     'depend_on_past': False,
-    'start_date': datetime(2020, 6, 11),
+    'start_date': datetime(2020, 6, 10),
     'email': ["jonas.bieri@bs.ch", "jonas.eckenfels@bs.ch"],
     'email_on_failure': True,
     'email_on_retry': False,
@@ -15,35 +15,33 @@ default_args = {
     'retry_delay': timedelta(minutes=3)
 }
 
-with DAG('gva-geodatenshop', default_args=default_args, schedule_interval="0 5 * * *", catchup=False) as dag:
+with DAG('tba_wildedeponien', default_args=default_args, schedule_interval="0 7,14 * * *", catchup=False) as dag:
     process_upload = DockerOperator(
         task_id='process-upload',
-        image='gva-geodatenshop:latest',
+        image='tba-wildedeponien:latest',
         api_version='auto',
         auto_remove=True,
-        command='/bin/bash /code/data-processing/gva_geodatenshop/etl.sh ',
-        container_name='gva-geodatenshop',
+        command='/bin/bash /code/data-processing/tba_wildedeponien/etl.sh ',
+        container_name='tba-wildedeponien',
         docker_url="unix://var/run/docker.sock",
         network_mode="bridge",
         tty=True,
-        volumes=['/data/dev/workspace/data-processing:/code/data-processing',
-                 '/mnt/OGD-GVA:/code/data-processing/gva_geodatenshop/data_orig']
+        volumes=['/data/dev/workspace/data-processing:/code/data-processing']
     )
 
-    ods_harvest = DockerOperator(
-        task_id='ods-harvest',
-        image='ods-harvest:latest',
+    ods_publish = DockerOperator(
+        task_id='ods-publish',
+        image='ods-publish:latest',
         api_version='auto',
         auto_remove=True,
-        command='python3 -m ods_harvest.etl gva-ftp-csv',
-        container_name='gva-geodatenshop--ods-harvest',
+        command='python3 -m ods_publish.etl da_a1jtix',
+        container_name='tba-wildedeponien--ods-publish',
         docker_url="unix://var/run/docker.sock",
         network_mode="bridge",
         tty=True,
         volumes=['/data/dev/workspace/data-processing:/code/data-processing'],
-        retry=3,
-        retry_delay=timedelta(minutes=10)
+        retry=5,
+        retry_delay=timedelta(minutes=5)
     )
 
-
-    process_upload >> ods_harvest
+    process_upload >> ods_publish

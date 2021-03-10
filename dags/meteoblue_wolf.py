@@ -15,7 +15,7 @@ default_args = {
     'retry_delay': timedelta(minutes=3)
 }
 
-with DAG('meteoblue-wolf', default_args=default_args, schedule_interval="10 * * * *", catchup=False) as dag:
+with DAG('meteoblue_wolf', default_args=default_args, schedule_interval="10 * * * *", catchup=False) as dag:
     process_upload = DockerOperator(
         task_id='process-upload',
         image='meteoblue-wolf:latest',
