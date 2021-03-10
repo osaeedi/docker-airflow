@@ -1,3 +1,13 @@
+"""
+# ods_catalog
+This DAG updates the 2 datasets that cover the latest polls. At time of this writing, these are:
+
+- [100079](https://data.bs.ch/explore/dataset/100079)
+- [100092](https://data.bs.ch/explore/dataset/100092)
+- [100099](https://data.bs.ch/explore/dataset/100099)
+- [100106](https://data.bs.ch/explore/dataset/100106)
+- [100107](https://data.bs.ch/explore/dataset/100107)
+"""
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
@@ -16,6 +26,7 @@ default_args = {
 }
 
 with DAG('stata_daily_upload', default_args=default_args, schedule_interval="30 9 * * *", catchup=False) as dag:
+        dag.doc_md = __doc__
         upload = DockerOperator(
                 task_id='upload',
                 image='stata_daily_upload:latest',
@@ -34,7 +45,7 @@ with DAG('stata_daily_upload', default_args=default_args, schedule_interval="30 
                 image='ods-publish:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='python3 -m ods_publish.etl da_vun6ea,da_710qw5,da_8b4qjp,da_o3fbuk,da_97mu0o',
+                command='python3 -m ods_publish.etl_id 100079,100092,100099,100106,100107',
                 container_name='stata_daily_upload--ods-publish',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
