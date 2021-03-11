@@ -2,6 +2,7 @@
 # md_covid19cases
 This DAG updates the following datasets:
 
+- [100076](https://data.bs.ch/explore/dataset/100076)
 - [100105](https://data.bs.ch/explore/dataset/100105)
 - [100108](https://data.bs.ch/explore/dataset/100108)
 """
