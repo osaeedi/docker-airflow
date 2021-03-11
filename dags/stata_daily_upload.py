@@ -2,6 +2,7 @@
 # stata_daily_upload
 This DAG updates the following datasets:
 
+- [100074](https://data.bs.ch/explore/dataset/100074)
 - [100079](https://data.bs.ch/explore/dataset/100079)
 - [100092](https://data.bs.ch/explore/dataset/100092)
 - [100099](https://data.bs.ch/explore/dataset/100099)
@@ -45,7 +46,7 @@ with DAG('stata_daily_upload', default_args=default_args, schedule_interval="30 
                 image='ods-publish:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='python3 -m ods_publish.etl_id 100079,100092,100099,100106,100107',
+                command='python3 -m ods_publish.etl_id 100074,100079,100092,100099,100106,100107',
                 container_name='stata_daily_upload--ods-publish',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
