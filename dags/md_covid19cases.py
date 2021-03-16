@@ -47,7 +47,7 @@ with DAG('md_covid19cases', default_args=default_args, schedule_interval='0 * * 
         image='ods-publish:latest',
         api_version='auto',
         auto_remove=True,
-        command='python3 -m ods_publish.etl_id 100105,100108,test-covid-19-verstorbene',
+        command='python3 -m ods_publish.etl_id 100076,100105,100108',
         container_name='md_covid19cases--ods-publish',
         docker_url="unix://var/run/docker.sock",
         network_mode="bridge",
