@@ -8,6 +8,11 @@ This DAG updates the following datasets:
 - [100099](https://data.bs.ch/explore/dataset/100099)
 - [100106](https://data.bs.ch/explore/dataset/100106)
 - [100107](https://data.bs.ch/explore/dataset/100107)
+- [100125](https://data.bs.ch/explore/dataset/100125)
+- [100126](https://data.bs.ch/explore/dataset/100126)
+- [100127](https://data.bs.ch/explore/dataset/100127)
+- [100128](https://data.bs.ch/explore/dataset/100128)
+- [100129](https://data.bs.ch/explore/dataset/100129)
 """
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
@@ -46,7 +51,7 @@ with DAG('stata_daily_upload', default_args=default_args, schedule_interval="30 
                 image='ods-publish:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='python3 -m ods_publish.etl_id 100074,100079,100092,100099,100106,100107',
+                command='python3 -m ods_publish.etl_id 100074,100079,100092,100099,100106,100107,100125,100126,100127,100128,100129',
                 container_name='stata_daily_upload--ods-publish',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
