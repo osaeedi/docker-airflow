@@ -1,5 +1,5 @@
 """
-# bafu-hydrodaten
+# bafu-hydrodata
 This DAG updates the following datasets:
 
 - [100089](https://data.bs.ch/explore/dataset/100089)
@@ -13,15 +13,15 @@ default_args = {
         'owner'                 : 'jonas.bieri',
         'description'           : 'Run the bafu_hydrodaten docker container',
         'depend_on_past'        : False,
-        'start_date'            : datetime(2020, 6, 25),
+        'start_date'            : datetime(2021, 5, 15),
         'email'                 : ["jonas.bieri@bs.ch", "jonas.eckenfels@bs.ch"],
         'email_on_failure'      : True,
         'email_on_retry'        : False,
         'retries'               : 0,
-        'retry_delay'           : timedelta(minutes=15)
+        'retry_delay'           : timedelta(minutes=3)
 }
 
-with DAG('bafu_hydrodaten', default_args=default_args, schedule_interval="*/5 * * * *", catchup=False) as dag:
+with DAG('bafu_hydrodata', default_args=default_args, schedule_interval="*/5 * * * *", catchup=False) as dag:
         dag.doc_md = __doc__
         upload = DockerOperator(
                 task_id='upload',
