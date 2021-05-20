@@ -32,7 +32,7 @@ with DAG('bag_coronavirus', default_args=default_args, schedule_interval="0 * * 
         image='bag_coronavirus:latest',
         api_version='auto',
         auto_remove=True,
-        command='/bin/bash /code/data-processing/bag_coronavirus/etl_tests.sh ',
+        command='/bin/bash /code/data-processing/bag_coronavirus/etl_bag_datasets.sh ',
         container_name='bag_coronavirus--upload',
         docker_url="unix://var/run/docker.sock",
         network_mode="bridge",
