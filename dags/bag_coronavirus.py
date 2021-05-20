@@ -45,7 +45,7 @@ with DAG('bag_coronavirus', default_args=default_args, schedule_interval="0 * * 
         image='bag_coronavirus:latest',
         api_version='auto',
         auto_remove=True,
-        command='python3 -m bag_coronavirus.vmdl_extract && python3 -m bag_coronavirus.etl_vmdl_impf_uebersicht && python3 -m bag_coronavirus.etl_vmdl_altersgruppen',
+        command='python3 -m bag_coronavirus.vmdl && python3 -m bag_coronavirus.etl_vmdl_impf_uebersicht && python3 -m bag_coronavirus.etl_vmdl_altersgruppen',
         container_name='bag_coronavirus--upload_vmdl',
         docker_url="unix://var/run/docker.sock",
         network_mode="bridge",
