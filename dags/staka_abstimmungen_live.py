@@ -1,5 +1,5 @@
 """
-# staka_abstimmungen
+# staka_abstimmungen_live
 This DAG updates the 2 datasets that cover the latest polls. At time of this writing, these are:
 
 - [100143](https://data.bs.ch/explore/dataset/100143)
