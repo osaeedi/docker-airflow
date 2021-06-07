@@ -51,4 +51,4 @@ with DAG('gd_coronavirus_massentests', default_args=default_args, schedule_inter
     #     retry_delay=timedelta(minutes=5)
     # )
 
-    upload # >> ods_publish
+    # upload >> ods_publish
