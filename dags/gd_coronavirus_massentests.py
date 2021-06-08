@@ -2,7 +2,8 @@
 # gd_coronavirus_massentests
 This DAG updates the following datasets:
 
-- [100000](https://data.bs.ch/explore/dataset/100000)
+- [100145](https://data.bs.ch/explore/dataset/100145)
+- [100146](https://data.bs.ch/explore/dataset/100146)
 """
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
@@ -36,19 +37,19 @@ with DAG('gd_coronavirus_massentests', default_args=default_args, schedule_inter
         volumes=['/data/dev/workspace/data-processing:/code/data-processing', '/mnt/OGD-DataExch/GD-GS/coronavirus-massentests:/code/data-processing/gd_coronavirus_massentests/data']
     )
 
-    # ods_publish = DockerOperator(
-    #     task_id='ods-publish',
-    #     image='ods-publish:latest',
-    #     api_version='auto',
-    #     auto_remove=True,
-    #     command='python3 -m ods_publish.etl_id 100000,100000',
-    #     container_name='gd_coronavirus_massentests--ods-publish',
-    #     docker_url="unix://var/run/docker.sock",
-    #     network_mode="bridge",
-    #     tty=True,
-    #     volumes=['/data/dev/workspace/data-processing:/code/data-processing'],
-    #     retry=2,
-    #     retry_delay=timedelta(minutes=5)
-    # )
+    ods_publish = DockerOperator(
+        task_id='ods-publish',
+        image='ods-publish:latest',
+        api_version='auto',
+        auto_remove=True,
+        command='python3 -m ods_publish.etl_id 100145,100146',
+        container_name='gd_coronavirus_massentests--ods-publish',
+        docker_url="unix://var/run/docker.sock",
+        network_mode="bridge",
+        tty=True,
+        volumes=['/data/dev/workspace/data-processing:/code/data-processing'],
+        retry=2,
+        retry_delay=timedelta(minutes=5)
+    )
 
-    # upload >> ods_publish
+    upload >> ods_publish
