@@ -30,13 +30,13 @@ default_args = {
 
 with DAG('bag_coronavirus', default_args=default_args, schedule_interval="0 * * * *", catchup=False) as dag:
     dag.doc_md = __doc__
-    upload = DockerOperator(
-        task_id='upload',
+    upload_bag_datasets = DockerOperator(
+        task_id='upload_bag_datasets',
         image='bag_coronavirus:latest',
         api_version='auto',
         auto_remove=True,
         command='/bin/bash /code/data-processing/bag_coronavirus/etl_bag_datasets.sh ',
-        container_name='bag_coronavirus--upload',
+        container_name='bag_coronavirus--upload_bag_datasets',
         docker_url="unix://var/run/docker.sock",
         network_mode="bridge",
         tty=True,
@@ -99,4 +99,4 @@ with DAG('bag_coronavirus', default_args=default_args, schedule_interval="0 * * 
         retry_delay=timedelta(minutes=5)
     )
 
-    ods_publish << upload_impfbereitschaft<< [upload, upload_vmdl, upload_impftermine]
+    ods_publish << upload_impfbereitschaft<< [upload_bag_datasets, upload_vmdl, upload_impftermine]
