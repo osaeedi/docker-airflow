@@ -69,6 +69,21 @@ with DAG('bag_coronavirus', default_args=default_args, schedule_interval="0 * * 
         volumes=['/data/dev/workspace/data-processing:/code/data-processing', '/mnt/OGD-DataExch/MD-HMW:/code/data-processing/bag_coronavirus/vmdl_data']
     )
 
+
+    upload_impfungen_restbevoelkerung = DockerOperator(
+        task_id='upload_impfungen_restbevoelkerung',
+        image='bag_coronavirus:latest',
+        api_version='auto',
+        auto_remove=True,
+        command='/bin/bash /code/data-processing/bag_coronavirus/etl_impfungen_restbevoelkerung.sh ',
+        container_name='bag_coronavirus--upload_impfungen_restbevoelkerung',
+        docker_url="unix://var/run/docker.sock",
+        network_mode="bridge",
+        tty=True,
+        volumes=['/data/dev/workspace/data-processing:/code/data-processing', '/mnt/OGD-DataExch/MD-HMW:/code/data-processing/bag_coronavirus/vmdl_data']
+    )
+
+
     ods_publish = DockerOperator(
         task_id='ods-publish',
         image='ods-publish:latest',
@@ -84,4 +99,4 @@ with DAG('bag_coronavirus', default_args=default_args, schedule_interval="0 * * 
         retry_delay=timedelta(minutes=5)
     )
 
-    ods_publish << [upload, upload_vmdl, upload_impftermine]
+    ods_publish << upload_impfungen_restbevoelkerung<< [upload, upload_vmdl, upload_impftermine]
