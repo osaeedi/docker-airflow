@@ -44,7 +44,7 @@ with DAG('aue_umweltlabor', default_args=default_args, schedule_interval="0 6 * 
                 image='ods-publish:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='python3 -m ods_publish.etl_id 100066,100067,100068,100069',
+                command='python3 -m ods_publish.etl_id 100066,100067,100068,100069,100150',
                 container_name='aue-umweltlabor--ods-publish',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
