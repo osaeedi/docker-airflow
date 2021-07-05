@@ -90,7 +90,7 @@ with DAG('bag_coronavirus', default_args=default_args, schedule_interval="0 * * 
         image='ods-publish:latest',
         api_version='auto',
         auto_remove=True,
-        command='python3 -m ods_publish.etl_id 100094,100111,100116,100119,100123,100135,100136,100137,100147',
+        command='python3 -m ods_publish.etl_id 100094,100111,100116,100119,100123,100135,100137,100147',
         container_name='bag_coronavirus--ods-publish',
         docker_url="unix://var/run/docker.sock",
         network_mode="bridge",
