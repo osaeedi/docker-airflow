@@ -58,7 +58,7 @@ with DAG('bag_coronavirus', default_args=default_args, schedule_interval="0 * * 
     )
 
     upload_impftermine = DockerOperator(
-        task_id='upload_imptermine',
+        task_id='upload_impftermine',
         image='bag_coronavirus:latest',
         api_version='auto',
         auto_remove=True,
