@@ -29,7 +29,7 @@ default_args = {
     'retry_delay'           : timedelta(minutes=15)
 }
 
-with DAG('bag_coronavirus', default_args=default_args, schedule_interval="0 * * * *", catchup=False) as dag:
+with DAG('bag_coronavirus', default_args=default_args, schedule_interval="15 * * * *", catchup=False) as dag:
     dag.doc_md = __doc__
     upload_bag_datasets = DockerOperator(
         task_id='upload_bag_datasets',
