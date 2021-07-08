@@ -2,6 +2,7 @@
 # stata_daily_upload
 This DAG updates the following datasets:
 
+- [100007](https://data.bs.ch/explore/dataset/100007)
 - [100011](https://data.bs.ch/explore/dataset/100011)
 - [100074](https://data.bs.ch/explore/dataset/100074)
 - [100079](https://data.bs.ch/explore/dataset/100079)
