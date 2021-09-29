@@ -2,7 +2,9 @@
 # luftqualitaet_ch
 This DAG updates the following datasets:
 
+- [100048](https://data.bs.ch/explore/dataset/100048)
 - [100049](https://data.bs.ch/explore/dataset/100049)
+- [100050](https://data.bs.ch/explore/dataset/100050)
 """
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
