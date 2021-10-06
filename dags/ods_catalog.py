@@ -37,20 +37,3 @@ with DAG('ods_catalog', default_args=default_args, schedule_interval='3 * * * *'
         tty=True,
         volumes=['/data/dev/workspace/data-processing:/code/data-processing']
     )
-
-    ods_publish = DockerOperator(
-        task_id='ods-publish',
-        image='ods-publish:latest',
-        api_version='auto',
-        auto_remove=True,
-        command='python3 -m ods_publish.etl_id 100057',
-        container_name='ods_catalog--ods-publish',
-        docker_url="unix://var/run/docker.sock",
-        network_mode="bridge",
-        tty=True,
-        volumes=['/data/dev/workspace/data-processing:/code/data-processing'],
-        retry=2,
-        retry_delay=timedelta(seconds=5)
-    )
-
-    upload >> ods_publish
