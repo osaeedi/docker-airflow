@@ -1,20 +1,6 @@
 """
 # stata_daily_upload
-This DAG updates the following datasets (see https://github.com/opendatabs/data-processing/blob/master/stata_daily_upload/etl.py):
-
-- [100007](https://data.bs.ch/explore/dataset/100007)
-- [100011](https://data.bs.ch/explore/dataset/100011)
-- [100074](https://data.bs.ch/explore/dataset/100074)
-- [100079](https://data.bs.ch/explore/dataset/100079)
-- [100092](https://data.bs.ch/explore/dataset/100092)
-- [100099](https://data.bs.ch/explore/dataset/100099)
-- [100106](https://data.bs.ch/explore/dataset/100106)
-- [100107](https://data.bs.ch/explore/dataset/100107)
-- [100125](https://data.bs.ch/explore/dataset/100125)
-- [100126](https://data.bs.ch/explore/dataset/100126)
-- [100127](https://data.bs.ch/explore/dataset/100127)
-- [100128](https://data.bs.ch/explore/dataset/100128)
-- [100129](https://data.bs.ch/explore/dataset/100129)
+This DAG updates datasets referenced in https://github.com/opendatabs/data-processing/blob/master/stata_daily_upload/etl.py:
 """
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
