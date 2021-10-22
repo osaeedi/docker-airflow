@@ -1,6 +1,6 @@
 """
 # stata_daily_upload
-This DAG updates the following datasets:
+This DAG updates the following datasets (see https://github.com/opendatabs/data-processing/blob/master/stata_daily_upload/etl.py):
 
 - [100007](https://data.bs.ch/explore/dataset/100007)
 - [100011](https://data.bs.ch/explore/dataset/100011)
@@ -33,7 +33,7 @@ default_args = {
         'retry_delay'           : timedelta(minutes=30)
 }
 
-with DAG('stata_daily_upload', default_args=default_args, schedule_interval="30 9 * * *", catchup=False) as dag:
+with DAG('stata_daily_upload', default_args=default_args, schedule_interval="0,30 * * * *", catchup=False) as dag:
         dag.doc_md = __doc__
         upload = DockerOperator(
                 task_id='upload',
