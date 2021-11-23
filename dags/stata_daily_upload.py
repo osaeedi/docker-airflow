@@ -31,7 +31,7 @@ with DAG('stata_daily_upload', default_args=default_args, schedule_interval="0,3
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge", 
                 tty=True,
-                volumes=['/mnt/OGD-DataExch/StatA:/code/data-processing/stata_daily_upload/data', '/data/dev/workspace/data-processing:/code/data-processing']
+                volumes=['/mnt/OGD-DataExch:/code/data-processing/stata_daily_upload/data', '/data/dev/workspace/data-processing:/code/data-processing']
         )
 
         # ods_publish = DockerOperator(
