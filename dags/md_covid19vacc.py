@@ -50,19 +50,4 @@ with DAG('md_covid19vacc', default_args=default_args, schedule_interval="15 * * 
         volumes=['/data/dev/workspace/data-processing:/code/data-processing', '/mnt/OGD-DataExch/MD-HMW:/code/data-processing/bag_coronavirus/vmdl_data']
     )
 
-    ods_publish = DockerOperator(
-        task_id='ods-publish',
-        image='ods-publish:latest',
-        api_version='auto',
-        auto_remove=True,
-        command='python3 -m ods_publish.etl_id 100147',
-        container_name='bag_coronavirus--ods-publish',
-        docker_url="unix://var/run/docker.sock",
-        network_mode="bridge",
-        tty=True,
-        volumes=['/data/dev/workspace/data-processing:/code/data-processing'],
-        retry=2,
-        retry_delay=timedelta(minutes=5)
-    )
-
-    ods_publish << upload_impfbereitschaft << upload_impftermine
+    upload_impftermine >> upload_impfbereitschaft
