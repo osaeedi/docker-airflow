@@ -100,4 +100,4 @@ with DAG('bag_coronavirus', default_args=default_args, schedule_interval="15 * *
         retry_delay=timedelta(minutes=5)
     )
 
-    ods_publish << upload_impfbereitschaft<< [upload_bag_datasets, upload_vmdl, upload_impftermine]
+    ods_publish << upload_impfbereitschaft << [upload_bag_datasets, upload_vmdl, upload_impftermine]
