@@ -36,19 +36,19 @@ with DAG('covid19_hosp', default_args=default_args, schedule_interval='*/15 * * 
                 volumes=['/data/dev/workspace/data-processing:/code/data-processing', '/mnt/OGD-DataExch/MD/ogd_upload:/code/data-processing/md_covid19cases/data']
         )
 
-        ods_publish = DockerOperator(
-                task_id='ods-publish',
-                image='ods-publish:latest',
-                api_version='auto',
-                auto_remove=True,
-                command='python3 -m ods_publish.etl_id 100109',
-                container_name='covid19_hosp--ods-publish',
-                docker_url="unix://var/run/docker.sock",
-                network_mode="bridge",
-                tty=True,
-                volumes=['/data/dev/workspace/data-processing:/code/data-processing'],
-                retry=2,
-                retry_delay=timedelta(minutes=5)
-        )
-
-        upload >> ods_publish
+        # ods_publish = DockerOperator(
+        #         task_id='ods-publish',
+        #         image='ods-publish:latest',
+        #         api_version='auto',
+        #         auto_remove=True,
+        #         command='python3 -m ods_publish.etl_id 100109',
+        #         container_name='covid19_hosp--ods-publish',
+        #         docker_url="unix://var/run/docker.sock",
+        #         network_mode="bridge",
+        #         tty=True,
+        #         volumes=['/data/dev/workspace/data-processing:/code/data-processing'],
+        #         retry=2,
+        #         retry_delay=timedelta(minutes=5)
+        # )
+        #
+        # upload >> ods_publish
