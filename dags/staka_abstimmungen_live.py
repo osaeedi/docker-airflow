@@ -2,8 +2,8 @@
 # staka_abstimmungen_live
 This DAG updates the 2 datasets that cover the latest polls. At time of this writing, these are:
 
-- [100161](https://data.bs.ch/explore/dataset/100161)
-- [100163](https://data.bs.ch/explore/dataset/100163)
+- [100161](https://data.bs.ch/explore/dataset/100168)
+- [100163](https://data.bs.ch/explore/dataset/100169)
 """
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
@@ -43,7 +43,7 @@ with DAG('staka_abstimmungen_live', default_args=default_args, schedule_interval
         image='ods-publish:latest',
         api_version='auto',
         auto_remove=True,
-        command='python3 -m ods_publish.etl_id 100161,100163',
+        command='python3 -m ods_publish.etl_id 100168,100169',
         container_name='staka_abstimmungen_live--ods-publish',
         docker_url="unix://var/run/docker.sock",
         network_mode="bridge",
