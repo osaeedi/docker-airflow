@@ -3,6 +3,7 @@
 This DAG updates the following datasets:
 
 - [100160](https://data.bs.ch/explore/dataset/100160)
+- [100171](https://data.bs.ch/explore/dataset/100171)
 """
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
