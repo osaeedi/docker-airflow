@@ -34,5 +34,5 @@ with DAG('gd_coronavirus_abwassermonitoring', default_args=default_args, schedul
         docker_url="unix://var/run/docker.sock",
         network_mode="bridge",
         tty=True,
-        volumes=['/data/dev/workspace/data-processing:/code/data-processing', '/mnt/OGD-DataExch/GD-Kantonslabor/Covid19_Abwasser:/code/data-processing/gd_coronavirus_abwassermonitoring/data']
+        volumes=['/data/dev/workspace/data-processing:/code/data-processing', '/mnt/OGD-DataExch/GD-Kantonslabor/Covid-19_Abwasser:/code/data-processing/gd_coronavirus_abwassermonitoring/data']
     )
