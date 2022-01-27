@@ -22,7 +22,7 @@ default_args = {
     'retry_delay'           : timedelta(minutes=15)
 }
 
-with DAG('gd_coronavirus_abwassermonitoring', default_args=default_args, schedule_interval=None, catchup=False) as dag:
+with DAG('mkb_sammlung_europa', default_args=default_args, schedule_interval=None, catchup=False) as dag:
     dag.doc_md = __doc__
     upload = DockerOperator(
         task_id='upload',
