@@ -19,7 +19,7 @@ default_args = {
         'retry_delay'           : timedelta(minutes=30)
 }
 
-with DAG('stata_daily_upload', default_args=default_args, schedule_interval="0,30 * * * *", catchup=False) as dag:
+with DAG('stata_daily_upload', default_args=default_args, schedule_interval="*/5 * * * *", catchup=False) as dag:
         dag.doc_md = __doc__
         upload = DockerOperator(
                 task_id='upload',
