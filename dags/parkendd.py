@@ -3,6 +3,7 @@
 This DAG updates the following datasets:
 
 - [100014](https://data.bs.ch/explore/dataset/100014)
+- [100044](https://data.bs.ch/explore/dataset/100044)
 """
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
@@ -36,19 +37,19 @@ with DAG('parkendd', default_args=default_args, schedule_interval="0 * * * *", c
         volumes=['/data/dev/workspace/data-processing:/code/data-processing']
     )
 
-    ods_publish = DockerOperator(
-        task_id='ods-publish',
-        image='ods-publish:latest',
-        api_version='auto',
-        auto_remove=True,
-        command='python3 -m ods_publish.etl_id 100014',
-        container_name='parkendd--ods-publish',
-        docker_url="unix://var/run/docker.sock",
-        network_mode="bridge",
-        tty=True,
-        volumes=['/data/dev/workspace/data-processing:/code/data-processing'],
-        retry=5,
-        retry_delay=timedelta(minutes=5)
-    )
-
-    process_upload >> ods_publish
+    # ods_publish = DockerOperator(
+    #     task_id='ods-publish',
+    #     image='ods-publish:latest',
+    #     api_version='auto',
+    #     auto_remove=True,
+    #     command='python3 -m ods_publish.etl_id 100014',
+    #     container_name='parkendd--ods-publish',
+    #     docker_url="unix://var/run/docker.sock",
+    #     network_mode="bridge",
+    #     tty=True,
+    #     volumes=['/data/dev/workspace/data-processing:/code/data-processing'],
+    #     retry=5,
+    #     retry_delay=timedelta(minutes=5)
+    # )
+    #
+    # process_upload >> ods_publish
