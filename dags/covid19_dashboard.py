@@ -28,7 +28,7 @@ with DAG('covid19_dashboard', default_args=default_args, schedule_interval="0 * 
                 image='covid19dashboard:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='/bin/bash /code/data-processing/covid19dashboard/etl.sh ',
+                command='python3 -m covid19dashboard.etl',
                 container_name='covid19dashboard',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge", 
