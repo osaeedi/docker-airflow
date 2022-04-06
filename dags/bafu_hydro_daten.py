@@ -28,7 +28,7 @@ with DAG('bafu_hydro_daten', default_args=default_args, schedule_interval="*/5 *
                 image='bafu_hydrodaten:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='/bin/bash /code/data-processing/bafu_hydrodaten/etl.sh ',
+                command='python3 -m bafu_hydrodaten.etl_https',
                 container_name='bafu_hydrodaten',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge", 
