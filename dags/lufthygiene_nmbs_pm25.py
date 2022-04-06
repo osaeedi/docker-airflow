@@ -28,7 +28,7 @@ with DAG('lufthygiene_nmbs_pm25', default_args=default_args, schedule_interval="
         image='lufthygiene_nmbs_pm25:latest',
         api_version='auto',
         auto_remove=True,
-        command='/bin/bash /code/data-processing/lufthygiene_nmbs_pm25/etl.sh ',
+        command='python3 -m lufthygiene_nmbs_pm25.etl',
         container_name='lufthygiene_nmbs_pm25',
         docker_url="unix://var/run/docker.sock",
         network_mode="bridge",
