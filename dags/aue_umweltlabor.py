@@ -32,7 +32,7 @@ with DAG('aue_umweltlabor', default_args=default_args, schedule_interval="0 6 * 
                 image='aue-umweltlabor:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='/bin/bash /code/data-processing/aue_umweltlabor/etl.sh ',
+                command='python3 -m aue_umweltlabor.etl',
                 container_name='aue-umweltlabor',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge", 
