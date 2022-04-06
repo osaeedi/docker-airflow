@@ -28,7 +28,7 @@ with DAG('aue_schall', default_args=default_args, schedule_interval="*/15 * * * 
                 image='aue_schall:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='/bin/bash /code/data-processing/aue_schall/etl.sh ',
+                command='python3 -m aue_schall.etl',
                 container_name='aue_schall',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge", 
