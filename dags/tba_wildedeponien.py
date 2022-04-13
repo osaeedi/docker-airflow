@@ -14,7 +14,7 @@ default_args = {
     'description': 'Run the tba-wildedeponien docker container',
     'depend_on_past': False,
     'start_date': datetime(2020, 6, 10),
-    'email': ["jonas.bieri@bs.ch", "jonas.eckenfels@bs.ch"],
+    'email': ["jonas.bieri@bs.ch", "jonas.eckenfels@bs.ch", "hester.pieters@bs.ch"],
     'email_on_failure': True,
     'email_on_retry': False,
     'retries': 0,

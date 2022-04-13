@@ -18,7 +18,7 @@ default_args = {
         'description'           : 'Run the aue-umweltlabor docker container',
         'depend_on_past'        : False,
         'start_date'            : datetime(2020, 3, 3),
-        'email'                 : ["jonas.bieri@bs.ch", "jonas.eckenfels@bs.ch"],
+        'email'                 : ["jonas.bieri@bs.ch", "jonas.eckenfels@bs.ch", "hester.pieters@bs.ch"],
         'email_on_failure'      : True,
         'email_on_retry'        : False,
         'retries'               : 0,
