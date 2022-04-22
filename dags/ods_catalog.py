@@ -15,7 +15,7 @@ default_args = {
     'description': 'Run the ods_catalog docker container',
     'depend_on_past': False,
     'start_date': datetime(2021, 2, 4),
-    'email': ["jonas.bieri@bs.ch", "jonas.eckenfels@bs.ch"],
+    'email': ["jonas.bieri@bs.ch", "jonas.eckenfels@bs.ch", "hester.pieters@bs.ch"],
     'email_on_failure': True,
     'email_on_retry': False,
     'retries': 0,
