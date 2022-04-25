@@ -22,7 +22,7 @@ default_args = {
     'retry_delay'           : timedelta(minutes=15)
 }
 
-with DAG('parlamentsdienst_gr_abstimmungen', default_args=default_args, schedule_interval="*/10 * * * *", catchup=False) as dag:
+with DAG('parlamentsdienst_gr_abstimmungen', default_args=default_args, schedule_interval="*/2 * * * *", catchup=False) as dag:
     dag.doc_md = __doc__
     upload_bag_datasets = DockerOperator(
         task_id='upload',
