@@ -1,5 +1,5 @@
 """
-# verkehrszaehldaten
+# mobilitaet_verkehrszaehldaten
 This DAG updates the following datasets:
 
 - [100006](https://data.bs.ch/explore/dataset/100006)
@@ -12,7 +12,7 @@ from airflow.operators.docker_operator import DockerOperator
 
 default_args = {
         'owner'                 : 'jonas.bieri',
-        'description'           : 'Run the verkehrszaehldaten docker container',
+        'description'           : 'Run the mobilitaet_verkehrszaehldaten docker container',
         'depend_on_past'        : False,
         'start_date'            : datetime(2020, 6, 4),
         'email'                 : ["jonas.bieri@bs.ch", "jonas.eckenfels@bs.ch", "hester.pieters@bs.ch"],
@@ -22,20 +22,20 @@ default_args = {
         'retry_delay'           : timedelta(minutes=15)
 }
 
-with DAG('verkehrszaehldaten', default_args=default_args, schedule_interval="0 5 * * *", catchup=False) as dag:
+with DAG('mobilitaet_verkehrszaehldaten', default_args=default_args, schedule_interval="0 5 * * *", catchup=False) as dag:
         dag.doc_md = __doc__
         upload = DockerOperator(
                 task_id='upload',
-                image='verkehrszaehldaten:latest',
+                image='mobilitaet_verkehrszaehldaten:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='/bin/bash /code/data-processing/verkehrszaehldaten/etl.sh ',
-                container_name='verkehrszaehldaten',
+                command = 'python3 -m mobilitaet_verkehrszaehldaten.etl',
+                container_name='mobilitaet_verkehrszaehldaten',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge", 
                 tty=True,
                 volumes=['/data/dev/workspace/data-processing:/code/data-processing',
-                         '/mnt/MOB-StatA:/code/data-processing/verkehrszaehldaten/data_orig']
+                         '/mnt/MOB-StatA:/code/data-processing/mobilitaet_verkehrszaehldaten/data_orig']
         )
 
         ods_publish = DockerOperator(
@@ -44,7 +44,7 @@ with DAG('verkehrszaehldaten', default_args=default_args, schedule_interval="0 5
                 api_version='auto',
                 auto_remove=True,
                 command='python3 -m ods_publish.etl_id 100006,100013',
-                container_name='verkehrszaehldaten--ods-publish',
+                container_name='mobilitaet_verkehrszaehldaten--ods-publish',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
                 tty=True,
