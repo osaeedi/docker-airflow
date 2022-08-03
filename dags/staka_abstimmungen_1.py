@@ -22,7 +22,7 @@ default_args = {
     'retry_delay': timedelta(minutes=3)
 }
 
-with DAG('staka_abstimmungen', default_args=default_args, schedule_interval="*/2 * * * *", catchup=False) as dag:
+with DAG('staka_abstimmungen_1', default_args=default_args, schedule_interval="*/2 * * * *", catchup=False) as dag:
     dag.doc_md = __doc__
     process_upload = DockerOperator(
         task_id='process-upload',
