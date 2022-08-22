@@ -1,5 +1,5 @@
 """
-# gsv_covid19_hosp_bs.py
+# gsv_covid19_hosp_bs_1.py
 This DAG helps populating the following datasets:
 
 - [100109](https://data.bs.ch/explore/dataset/100109)
@@ -12,7 +12,7 @@ from airflow.operators.docker_operator import DockerOperator
 
 default_args = {
     'owner'                 : 'hester.pieters',
-    'description'           : 'Run the gsv_covid19_hosp_bs.py docker container',
+    'description'           : 'Run the gsv_covid19_hosp_bs_1.py docker container',
     'depend_on_past'        : False,
     'start_date'            : datetime(2021, 12, 17),
     'email'                 : ["jonas.bieri@bs.ch", "jonas.eckenfels@bs.ch", "hester.pieters@bs.ch"],
@@ -22,7 +22,7 @@ default_args = {
     'retry_delay'           : timedelta(minutes=15)
 }
 
-with DAG('gsv_covid19_hosp_bs', default_args=default_args, schedule_interval='*/2 7-22 * * *', catchup=False) as dag:
+with DAG('gsv_covid19_hosp_bs_1', default_args=default_args, schedule_interval='*/2 7-22 * * *', catchup=False) as dag:
     dag.doc_md = __doc__
     upload = DockerOperator(
         task_id='upload',
