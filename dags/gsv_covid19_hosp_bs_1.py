@@ -12,7 +12,7 @@ from airflow.operators.docker_operator import DockerOperator
 
 default_args = {
     'owner'                 : 'hester.pieters',
-    'description'           : 'Run the gsv_covid19_hosp_bs_1.py docker container',
+    'description'           : 'Run the gsv_covid19_hosp_bs.py docker container',
     'depend_on_past'        : False,
     'start_date'            : datetime(2021, 12, 17),
     'email'                 : ["jonas.bieri@bs.ch", "jonas.eckenfels@bs.ch", "hester.pieters@bs.ch"],
