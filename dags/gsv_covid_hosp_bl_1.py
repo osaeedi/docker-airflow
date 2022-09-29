@@ -1,3 +1,5 @@
+# gsv_covid19_hosp_bl_1.py
+
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
@@ -15,7 +17,7 @@ default_args = {
     'retry_delay'           : timedelta(minutes=15)
 }
 
-with DAG('gsv_covid19_hosp_bl', default_args=default_args, schedule_interval='*/2 7-22 * * *', catchup=False) as dag:
+with DAG('gsv_covid19_hosp_bl_1', default_args=default_args, schedule_interval='*/2 7-22 * * *', catchup=False) as dag:
     dag.doc_md = __doc__
     upload = DockerOperator(
         task_id='upload',
