@@ -1,5 +1,5 @@
 """
-# covid19_hosp
+# covid19_hosp_1.py
 This DAG updates the following datasets:
 
 - [100109](https://data.bs.ch/explore/dataset/100109)
@@ -21,7 +21,7 @@ default_args = {
         'retry_delay'           : timedelta(minutes=15)
 }
 
-with DAG('covid19_hosp', default_args=default_args, schedule_interval='*/15 * * * *', catchup=False) as dag:
+with DAG('covid19_hosp_1', default_args=default_args, schedule_interval='*/15 * * * *', catchup=False) as dag:
         dag.doc_md = __doc__
         upload = DockerOperator(
                 task_id='upload',
