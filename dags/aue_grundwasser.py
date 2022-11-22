@@ -2,7 +2,10 @@
 # aue_grundwasser
 This DAG updates the following datasets:
 
-- [XXXXXX](https://data.bs.ch/explore/dataset/XXXXXX)
+- [100164](https://data.bs.ch/explore/dataset/100164)
+- [100179](https://data.bs.ch/explore/dataset/100179)
+- [100180](https://data.bs.ch/explore/dataset/100180)
+- [100181](https://data.bs.ch/explore/dataset/100181)
 """
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
