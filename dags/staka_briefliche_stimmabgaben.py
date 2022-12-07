@@ -1,5 +1,5 @@
 """
-# staka_briefliche_stimmabgaben.py
+# staka_briefliche_stimmabgaben_1.py
 This DAG helps populating the following datasets:
 
 - [100223](https://data.bs.ch/explore/dataset/100223)
@@ -23,7 +23,7 @@ default_args = {
     'retry_delay'           : timedelta(minutes=3)
 }
 
-with DAG('staka_briefliche_stimmabgaben', default_args=default_args, schedule_interval='*/2 * * * *', catchup=False) as dag:
+with DAG('staka_briefliche_stimmabgaben_1', default_args=default_args, schedule_interval='*/2 * * * *', catchup=False) as dag:
     dag.doc_md = __doc__
     upload = DockerOperator(
         task_id='upload',
