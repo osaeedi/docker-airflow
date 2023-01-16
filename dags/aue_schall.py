@@ -21,7 +21,7 @@ default_args = {
         'retry_delay'           : timedelta(minutes=15)
 }
 
-with DAG('aue_schall', default_args=default_args, schedule_interval="*/15 * * * *", catchup=False) as dag:
+with DAG('aue_schall_1', default_args=default_args, schedule_interval="*/15 * * * *", catchup=False) as dag:
         dag.doc_md = __doc__
         upload = DockerOperator(
                 task_id='upload',
