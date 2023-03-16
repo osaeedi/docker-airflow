@@ -50,4 +50,4 @@ with DAG('iwb_netzlast', default_args=default_args, schedule_interval="0 * * * *
         volumes=['/data/dev/workspace/data-processing:/code/data-processing', '/mnt/OGD-DataExch/StatA/Stromverbrauch:/code/data-processing/stata_erwarteter_stromverbrauch/data/export']
     )
 
-    upload >> fit_model
+    upload ## >> fit_model
