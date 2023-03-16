@@ -36,3 +36,18 @@ with DAG('iwb_netzlast', default_args=default_args, schedule_interval="0 * * * *
         tty=True,
         volumes=['/data/dev/workspace/data-processing:/code/data-processing', '/mnt/OGD-DataExch/IWB/Netzlast:/code/data-processing/iwb_netzlast/data']
     )
+
+    fit_model = DockerOperator(
+        task_id='fit_model',
+        image='stromverbrauch:latest',
+        api_version='auto',
+        auto_remove=True,
+        command='Rscript /code/data-processing/stata_erwarteter_stromverbrauch/Stromverbrauch_OGD.R',
+        container_name='stromverbrauch--fit_model',
+        docker_url="unix://var/run/docker.sock",
+        network_mode="bridge",
+        tty=True,
+        volumes=['/data/dev/workspace/data-processing:/code/data-processing', '/mnt/OGD-DataExch/StatA/Stromverbrauch:/code/data-processing/stata_erwarteter_stromverbrauch/data/export']
+    )
+
+    upload >> fit_model
