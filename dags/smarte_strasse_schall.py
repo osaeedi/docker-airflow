@@ -22,7 +22,7 @@ default_args = {
         'retry_delay'           : timedelta(minutes=15)
 }
 
-with DAG('smarte_strasse_schall_1', default_args=default_args, schedule_interval="*/5 * * * *", catchup=False) as dag:
+with DAG('smarte_strasse_schall_2', default_args=default_args, schedule_interval="*/5 * * * *", catchup=False) as dag:
         dag.doc_md = __doc__
         upload = DockerOperator(
                 task_id='upload',
