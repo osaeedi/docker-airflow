@@ -36,18 +36,18 @@ with DAG('md_covid19vacc', default_args=default_args, schedule_interval="15 * * 
         tty=True,
         volumes=['/data/dev/workspace/data-processing:/code/data-processing', '/mnt/OGD-DataExch/MD-HMW:/code/data-processing/bag_coronavirus/vmdl_data']
     )
-
-    upload_impfbereitschaft = DockerOperator(
-        task_id='upload_impfbereitschaft',
-        image='bag_coronavirus:latest',
-        api_version='auto',
-        auto_remove=True,
-        command='/bin/bash /code/data-processing/bag_coronavirus/etl_impfbereitschaft.sh ',
-        container_name='bag_coronavirus--upload_impfbereitschaft',
-        docker_url="unix://var/run/docker.sock",
-        network_mode="bridge",
-        tty=True,
-        volumes=['/data/dev/workspace/data-processing:/code/data-processing', '/mnt/OGD-DataExch/MD-HMW:/code/data-processing/bag_coronavirus/vmdl_data']
-    )
-
-    upload_impftermine >> upload_impfbereitschaft
+    #
+    # upload_impfbereitschaft = DockerOperator(
+    #     task_id='upload_impfbereitschaft',
+    #     image='bag_coronavirus:latest',
+    #     api_version='auto',
+    #     auto_remove=True,
+    #     command='/bin/bash /code/data-processing/bag_coronavirus/etl_impfbereitschaft.sh ',
+    #     container_name='bag_coronavirus--upload_impfbereitschaft',
+    #     docker_url="unix://var/run/docker.sock",
+    #     network_mode="bridge",
+    #     tty=True,
+    #     volumes=['/data/dev/workspace/data-processing:/code/data-processing', '/mnt/OGD-DataExch/MD-HMW:/code/data-processing/bag_coronavirus/vmdl_data']
+    # )
+    #
+    # upload_impftermine >> upload_impfbereitschaft
