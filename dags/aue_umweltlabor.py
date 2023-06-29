@@ -6,7 +6,6 @@ This DAG updates the following datasets:
 - [100067](https://data.bs.ch/explore/dataset/100067)
 - [100068](https://data.bs.ch/explore/dataset/100068)
 - [100069](https://data.bs.ch/explore/dataset/100069)
-- [100150](https://data.bs.ch/explore/dataset/100150)
 """
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
@@ -45,7 +44,7 @@ with DAG('aue_umweltlabor', default_args=default_args, schedule_interval="0 6 * 
                 image='ods-publish:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='python3 -m ods_publish.etl_id 100066,100067,100068,100069,100150',
+                command='python3 -m ods_publish.etl_id 100066,100067,100068,100069',
                 container_name='aue-umweltlabor--ods-publish',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
