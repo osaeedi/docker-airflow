@@ -10,7 +10,7 @@ default_args = {
     'description'           : 'Run the gsv_covid19_hosp_bl.py docker container',
     'depend_on_past'        : False,
     'start_date'            : datetime(2022, 5, 13),
-    'email'                 : ["jonas.bieri@bs.ch", "jonas.eckenfels@bs.ch", "hester.pieters@bs.ch"],
+    'email'                 : ["jonas.bieri@bs.ch", "jonas.eckenfels@bs.ch", "orhan.saeedi@bs.ch", "nicolas.maire@bs.ch"],
     'email_on_failure'      : True,
     'email_on_retry'        : False,
     'retries'               : 0,

@@ -15,7 +15,7 @@ default_args = {
     'description'           : 'Run the gd_coronavirus_massentests docker container',
     'depend_on_past'        : False,
     'start_date'            : datetime(2021, 6, 7),
-    'email'                 : ["jonas.bieri@bs.ch", "jonas.eckenfels@bs.ch", "hester.pieters@bs.ch"],
+    'email'                 : ["jonas.bieri@bs.ch", "jonas.eckenfels@bs.ch", "orhan.saeedi@bs.ch", "nicolas.maire@bs.ch"],
     'email_on_failure'      : True,
     'email_on_retry'        : False,
     'retries'               : 0,
