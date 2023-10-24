@@ -29,7 +29,7 @@ with DAG('zefix_handelsregister', default_args=default_args, schedule_interval='
                 image='zefix_handelsregister:latest',
                 api_version='auto',
                 auto_remove=True,
-                command='/bin/bash /code/data-processing/zefix_handelsregister/etl.sh ',
+                command='python3 -m zefix_handelsregister.etl ',
                 container_name='zefix_handelsregister',
                 docker_url="unix://var/run/docker.sock",
                 network_mode="bridge",
