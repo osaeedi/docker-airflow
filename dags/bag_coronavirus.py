@@ -41,7 +41,7 @@ with DAG('bag_coronavirus', default_args=default_args, schedule_interval="15 * *
         tty=True,
         volumes=['/data/dev/workspace/data-processing:/code/data-processing', '/mnt/OGD-DataExch/StatA/BAG_Coronavirus_Tests:/code/data-processing/bag_coronavirus/data']
     )
-
+    '''
     upload_vmdl = DockerOperator(
         task_id='upload_vmdl',
         image='bag_coronavirus:latest',
@@ -54,7 +54,7 @@ with DAG('bag_coronavirus', default_args=default_args, schedule_interval="15 * *
         tty=True,
         volumes=['/data/dev/workspace/data-processing:/code/data-processing', '/mnt/OGD-DataExch/MD-HMW:/code/data-processing/bag_coronavirus/vmdl_data']
     )
-
+    '''
     ods_publish = DockerOperator(
         task_id='ods-publish',
         image='ods-publish:latest',
@@ -70,4 +70,4 @@ with DAG('bag_coronavirus', default_args=default_args, schedule_interval="15 * *
         retry_delay=timedelta(minutes=5)
     )
 
-    ods_publish  << [upload_bag_datasets, upload_vmdl]
+    ods_publish  << [upload_bag_datasets] # commented out: upload_vmdl
